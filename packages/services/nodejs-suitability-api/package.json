@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-suitability-api",
+  "version": "1.0.0",
+  "description": "Suitability API in NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vitor-tadashi/suitability-api.git"
+  },
+  "keywords": [
+    "nodejs",
+    "suitability",
+    "origin"
+  ],
+  "author": "Vitor Tadashi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vitor-tadashi/suitability-api/issues"
+  },
+  "homepage": "https://github.com/vitor-tadashi/suitability-api#readme"
+}
