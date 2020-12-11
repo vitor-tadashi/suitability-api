@@ -17,21 +17,21 @@ The proposed challenge can be viewed in the [challenge.md] (challenge.md) file a
 The solution uses [node](http://nodejs.org) and [npm](https://npmjs.com). Please go check them out if you don't have them locally installed.
 
 ```sh
-$ cd package/services/suitability-api
+$ cd packages/services/suitability-api
 $ npm install
 ```
 
 ## Run
 
 ```sh
-$ cd package/services/suitability-api
+$ cd packages/services/suitability-api
 $ npm start
 ```
 
 ## Test
 
 ```sh
-$ cd package/services/suitability-api
+$ cd packages/services/suitability-api
 $ npm test
 ```
 
@@ -67,12 +67,11 @@ x-xss-protection: 0
 
 ## HTTP verbs available
 
+Where possible, API strives to use appropriate HTTP verbs for each action.
 
-  Where possible, API strives to use appropriate HTTP verbs for each action.
-
-  | Verb    | Description                                 |
-  | ------- | ------------------------------------------- |
-  | `POST`  | Used to calculate product suitability                |
+| Verb    | Description                                 |
+| ------- | ------------------------------------------- |
+| `POST`  | Used to calculate product suitability                |
 
 ## API Documentation
 
