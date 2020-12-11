@@ -7,7 +7,7 @@
   "income-invalid": { "code": 1005, "details": "The attribute 'income' is invalid.", "message": "" },
   "marital-status-required": { "code": 1006, "details": "The attribute 'marital_status' is required.", "message": "" },
   "marital-status-invalid": { "code": 1007, "details": "The attribute 'marital_status' is invalid.", "message": "" },
-  "risk-questions-required": { "code": 1008, "details": "The attribute 'risk_questions' is invalid.", "message": "" },
+  "risk-questions-required": { "code": 1008, "details": "The attribute 'risk_questions' is required.", "message": "" },
   "risk-questions-invalid": { "code": 1010, "details": "The attribute 'risk_questions' is invalid.", "message": "" },
   "house-ownership-status-required": { "code": 1011, "details": "The attribute 'house.ownership_status' is required.", "message": "" },
   "house-ownership-status-invalid": { "code": 1012, "details": "The attribute 'house.ownership_status' is invalid.", "message": "" },

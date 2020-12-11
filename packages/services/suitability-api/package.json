@@ -8,7 +8,7 @@
     "lint-fix": "eslint src --fix",
     "dev": "cross-env RUN_ENV=dev nodemon -w server -w build -w src ./src/server.js",
     "test": "cross-env RUN_ENV=test jest --ci --coverage --runInBand --detectOpenHandles --useStderr --verbose",
-    "start": "node ./src/server.js"
+    "start": "nodemon -w server -w build -w src ./src/server.js"
   },
   "repository": {
     "type": "git",

@@ -61,10 +61,10 @@ module.exports = class {
 
     if (customer.marital_status.toUpperCase() === MARITAL_STATUS.MARRIED) {
       generalScore = generalScore - 1;
-    }
+    } 
 
-    generalScore = generalScore + this.applyHomeOwnershipStatusScore(customer.home);
-    generalScore = generalScore + this.applyDependentsScore(customer.depedents);
+    generalScore = generalScore + this.applyDependentsScore(customer.dependents);
+    generalScore = generalScore + this.applyHomeOwnershipStatusScore(customer.house);    
 
     return this.convertScoreToRiskProfile(generalScore);
   }
@@ -84,12 +84,13 @@ module.exports = class {
       generalScore = generalScore + 1;
     }
 
-    generalScore = generalScore + this.applyDependentsScore(customer.depedents);
+    generalScore = generalScore + this.applyDependentsScore(customer.dependents);
 
     return this.convertScoreToRiskProfile(generalScore);
   }
 
   applyAgeScore(age) {
+    if (!age) throw Error('param \'age\' can\'t be null')
     if (age < 30) return -2;
     if (age >= 30 && age <= 40) return -1;
 
@@ -97,43 +98,49 @@ module.exports = class {
   }
 
   applyIncomeScore(income) {
+    if (!income && !Number.isInteger(income)) throw Error('param \'income\' can\'t be null')
     if (income > 200000) return -1;
 
     return 0;
   }
 
   applyDependentsScore(dependents) {
+    if (!dependents && !Number.isInteger(dependents)) throw Error('param \'dependents\' can\'t be null')
     if (dependents > 0) return 1;
 
     return 0;
   }
 
   applyHomeOwnershipStatusScore(home) {
+    if (!home) throw Error('param \'home\' can\'t be null')
     if (home && home.ownership_status.toUpperCase() === OWNERSHIP_STATUS.MORTGAGED) return 1;
 
     return 0;
   }
 
   convertScoreToRiskProfile(score) {
+    if (!score && !Number.isInteger(score)) throw Error('param \'score\' can\'t be null')
     if (score <= 0) return RISK_PROFILE.ECONOMIC;
     if (score === 1 || score === 2) return RISK_PROFILE.REGULAR;
     if (score >= 3) return RISK_PROFILE.RESPONSIBLE;
   }
 
   validateCustomerData(customer) {
+    if (!customer) throw Error('param \'customer\' can\'t be null')
+
     if (!customer.age) {
       throw new ValidationError(MessageHelper.get('age-required'));
     }
 
-    if (customer.age < 0) {
+    if (!Number.isInteger(customer.age) || customer.age < 0) {
       throw new ValidationError(MessageHelper.get('age-invalid'));
     }
 
-    if (!customer.dependents) {
+    if (!customer.dependents && !Number.isInteger(customer.dependents)) {
       throw new ValidationError(MessageHelper.get('dependents-required'));
     }
 
-    if (customer.dependents && customer.dependents < 0) {
+    if (!Number.isInteger(customer.dependents) || customer.dependents && customer.dependents < 0) {
       throw new ValidationError(MessageHelper.get('dependents-invalid'));
     }
 
@@ -141,7 +148,7 @@ module.exports = class {
       throw new ValidationError(MessageHelper.get('income-required'));
     }
 
-    if (customer.income < 0) {
+    if (!Number.isInteger(customer.income) || customer.income < 0) {
       throw new ValidationError(MessageHelper.get('income-invalid'));
     }
 
@@ -157,7 +164,7 @@ module.exports = class {
       throw new ValidationError(MessageHelper.get('risk-questions-required'));
     }
 
-    if (!Array.isArray(customer.risk_questions) || customer.risk_questions.lenght < 3) {
+    if (!Array.isArray(customer.risk_questions) || customer.risk_questions.length != 3 || customer.risk_questions.some(isNaN)) {
       throw new ValidationError(MessageHelper.get('risk-questions-invalid'));
     }
 
