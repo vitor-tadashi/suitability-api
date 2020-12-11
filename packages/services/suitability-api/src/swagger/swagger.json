@@ -1,0 +1,162 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "API to check the customer profile on each type of insurance",
+		"version": "1.0.0",
+		"title": "Suitability API",
+		"termsOfService": "https://www.yara.com/terms-of-use/",
+		"contact": {
+			"name": "Vitor Tadashi Uno Nishimura",
+      "url": "https://github.com/vitor-tadashi",
+      "email": "vitor.tadashi@outlook.com"
+		}
+	},
+	"paths": {
+    "/suitability/": {
+      "post": {
+        "tags": [
+          "suitability"
+        ],
+        "summary": "Check the customer profile on each type of insurance",
+        "description": "This API will verify all the customer data and will adapt his profile for each type of insurance available on the platform.",
+        "operationId": "applySuitability",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Customer data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/customer"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Error object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Class name where the error occurred"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Generic message used to report errors in external components (e.g. JPMorgan API, Facebook API)",
+                  "example": "A problem occurred consuming JPMorgan API. See more in details."
+                },
+                "details": {
+                  "type": "string",
+                  "description": "Error detail",
+                  "example": "Customer's age is required."
+                },
+                "code": {
+                  "type": "integer",
+                  "description": "Error code",
+                  "example": 1001
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Error title",
+                  "example": "Bad request"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Operation not found"
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "When an error that has not been treated happens within the application, error 500 will be returned",
+                  "example": "Internal Server Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+	},
+	"definitions": {
+    "customer": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "example": 35,
+          "description": "Age (an integer equal or greater than 0)."
+        },
+        "dependents": {
+          "type": "integer",
+          "example": 2,
+          "description": "The number of dependents (an integer equal or greater than 0)."
+        },
+        "income": {
+          "type": "integer",
+          "example": 140000,
+          "description": "Income (an integer equal or greater than 0)."
+        },
+        "marital_status": {
+          "type": "string",
+          "example": "married",
+          "enum": ["single", "married"]
+        },
+        "house": {
+          "type": "object",
+          "$ref": "#/definitions/house",
+          "description": "Optional, the user may or may not have a home."
+        },
+        "vehicle": {
+          "type": "object",
+          "$ref": "#/definitions/vehicle",
+          "description": "Optional, the user may or may not have a car."
+        },
+        "risk_questions": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "example": [0,1,0],
+          "description": "Risk answers (an array with 3 integers)."
+        }
+      },
+      "xml": {
+        "name": "suitability"
+      }
+    },
+    "house": {
+      "properties": {
+        "ownership_status": {
+          "type": "string",
+          "example": "owned",
+          "enum": ["owned", "mortgaged"]
+        }
+      }
+    },
+    "vehicle": {
+      "properties": {
+        "year": {
+          "type": "integer",
+          "example": 2018,
+          "description": "The year the car was manufactured."
+        }
+      }
+    }
+  }
+}
