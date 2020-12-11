@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- [Challenge and Solution Architecture](#challenge-solution-architecture)
+- [Challenge](#challenge)
 - [Install](#install)
 - [Run](#run)
 - [Test](#test)
@@ -10,8 +10,8 @@
 - [HTTP verbs available](#http-verbs-available)
 - [API Documentation](#api-documentation)
 
-## Challenge and Solution Architecture
-The proposed challenge can be viewed in the [challenge.md] (challenge.md) file and the proposed solution can be viewed in the [solution-architecture.md] file (solution-architecture.md)
+## Challenge 
+The proposed challenge can be viewed in the [challenge.md](challenge.md) file.
 
 ## Install
 The solution uses [node](http://nodejs.org) and [npm](https://npmjs.com). Please go check them out if you don't have them locally installed.
