@@ -1,3 +1,4 @@
 src/i18n
 node_modules
 tools
+*.test.js
